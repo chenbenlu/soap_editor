@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>SOAP Generator (Local Secure Version)</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@stlite/mountable@0.31.1/build/stlite.css"/>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@stlite/mountable@0.31.1/build/stlite.js"></script>
+    <script>
+      // 在瀏覽器內啟動 Streamlit
+      stlite.mount(
+        {
+          requirements: [], // 因為只用內建函式庫 re, copy, collections，所以留空
+          entrypoint: "soap_app.py",
+          files: {
+            "soap_app.py": {
+              url: "./soap_app.py" // 直接抓取同一個資料夾下的 Python 檔案
+            }
+          }
+        },
+        document.getElementById("root")
+      );
+    </script>
+  </body>
+</html>
