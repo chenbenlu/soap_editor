@@ -3,30 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>SOAP Generator (Local Secure Version)</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@stlite/mountable@0.31.1/build/stlite.css"/>
+    <title>SOAP Generator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@stlite/mountable@latest/build/stlite.css"/>
   </head>
   <body>
     <div id="root">
         <h2 style="text-align: center; font-family: sans-serif; color: #666; margin-top: 20vh;">
-            ⏳ 首次啟動需下載 Python 引擎 (大約 10~20 秒)，請稍候...
+            ⏳ 首次啟動需下載 Python 引擎 (大約 10~30 秒)，請稍候...
         </h2>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/@stlite/mountable@0.31.1/build/stlite.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@stlite/mountable@latest/build/stlite.js"></script>
     <script>
-      // 自動修正 GitHub Pages 的斜線路徑問題
-      let currentUrl = window.location.href;
-      if (!currentUrl.endsWith("/")) {
-          currentUrl += "/";
-      }
-      
+      // 【修正】使用防彈級的路徑解析法，無論有沒有 index.html 都能正確抓到 soap_app.py
+      const currentPath = window.location.pathname;
+      const basePath = currentPath.substring(0, currentPath.lastIndexOf('/')) + '/';
+      const pyFileUrl = window.location.origin + basePath + "soap_app.py";
+
       stlite.mount(
         {
           requirements: [],
           entrypoint: "soap_app.py",
           files: {
             "soap_app.py": {
-              url: currentUrl + "soap_app.py"
+              url: pyFileUrl
             }
           }
         },
