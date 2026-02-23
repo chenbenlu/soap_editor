@@ -7,17 +7,26 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@stlite/mountable@0.31.1/build/stlite.css"/>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+        <h2 style="text-align: center; font-family: sans-serif; color: #666; margin-top: 20vh;">
+            ⏳ 首次啟動需下載 Python 引擎 (大約 10~20 秒)，請稍候...
+        </h2>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/@stlite/mountable@0.31.1/build/stlite.js"></script>
     <script>
-      // 在瀏覽器內啟動 Streamlit
+      // 自動修正 GitHub Pages 的斜線路徑問題
+      let currentUrl = window.location.href;
+      if (!currentUrl.endsWith("/")) {
+          currentUrl += "/";
+      }
+      
       stlite.mount(
         {
-          requirements: [], // 因為只用內建函式庫 re, copy, collections，所以留空
+          requirements: [],
           entrypoint: "soap_app.py",
           files: {
             "soap_app.py": {
-              url: "./soap_app.py" // 直接抓取同一個資料夾下的 Python 檔案
+              url: currentUrl + "soap_app.py"
             }
           }
         },
